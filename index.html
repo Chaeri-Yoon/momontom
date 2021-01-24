@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/1aa037c88d.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="src/style.css" />
+    <link rel="stylesheet" href="src/calender.css" />
+    <link rel="stylesheet" href="src/toDoList.css" />
+    <link rel="stylesheet" href="src/timeAndGreeting.css">
+    <link rel="stylesheet" href="src/geolocation.css">
+    <title>Momontom</title>
+  </head>
+  <body>
+    <div class="weather">
+      <span class="jsTemperature"></span>
+      <span class="jsLocation"></span>
+    </div>
+    <div class="timeAndGreeting">
+      <div class="time">
+        <span class="clock jsClock"></span>
+      </div>
+      <div class="greeting">
+        <div class="greetingMessage jsGreetingMessage">
+          <span>Hello,
+            <span class="jsUserName"></span>
+          </span>
+        </div>
+        <form class="enterUserNameForm jsEnterUserNameForm">
+          <span>What is your name?</span>
+          <input type="text" class="jsEnteredUserName" size="5"/>
+        </form>
+      </div>
+    </div>
+    <aside>
+      <div class="schedule">
+        <div class="calender">
+          <div class="month">
+            <ul>
+              <li class="prev">
+                <button class="jsBtnPrevMonth">
+                  <i class="fas fa-chevron-left fa-lg"></i>
+                </button>
+              </li>
+              <li class="next">
+                <button class="jsBtnNextMonth">
+                  <i class="fas fa-chevron-right fa-lg"></i>
+                </button>
+              </li>
+              <li class="jsMonth"></li>
+              <br />
+              <span class="jsYear" style="font-size: 18px">2017</span>
+            </ul>
+          </div>
+          <ul class="weekdays">
+            <li>Sun</li>
+            <li>Mon</li>
+            <li>Tue</li>
+            <li>Wed</li>
+            <li>Thu</li>
+            <li>Fri</li>
+            <li>Sat</li>
+          </ul>
+          <ul class="days jsDays">
+            <!-- 여기에 Day 추가 -->
+          </ul>
+        </div>
+        <div class="toDoList">
+          <form class="toDoForm jsToDoForm">
+            <span>To Do List</span>
+            <div class="addArea">
+              <i class="fas fa-plus btn__plus"></i>
+              <input type="text" class="jsEnterSpace" />
+            </div>
+          </form>
+          <ul class="toDo jsToDoList"></ul>
+          <ul class="done jsDoneList"></ul>
+        </div>
+      </aside>
+    </aside>
+
+    <script src="src/background.js"></script>
+    <script src="src/clock.js"></script>
+    <script src="src/greeting.js"></script>
+    <script src="src/calender.js"></script>
+    <script src="src/toDoList.js"></script>
+    <script src="src/geolocation.js"></script>
+  </body>
+</html>
