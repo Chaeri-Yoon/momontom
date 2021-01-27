@@ -149,14 +149,14 @@ function removeData(_item, _isUnDone){
     if(_isUnDone) toDoTasks = array;
     else doneTasks = array;
     
-    if(toDoTasks.length != 0){
+    //if(toDoTasks.length != 0){
         const toDoData = JSON.stringify(toDoTasks);
         localStorage.setItem([displayDate] + "__" + [UNDONE], toDoData);
-    }
-    if(doneTasks.length != 0){
+    //}
+    //if(doneTasks.length != 0){
         const doneData = JSON.stringify(doneTasks);
         localStorage.setItem([displayDate] + "__" + [DONE], doneData);
-    }
+    //}
 }
 function deleteTask(event){
     const selectedTask = event.target.parentNode;
