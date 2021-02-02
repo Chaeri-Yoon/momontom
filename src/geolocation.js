@@ -1,6 +1,9 @@
 const API_KEY = "fc143835e033e035175987058d5bcc98";
 const temperature = document.querySelector('.jsTemperature');
 const position = document.querySelector('.jsLocation');
+const weather = document.querySelector('.jsWeather');
+const weatherIcon = document.querySelector('.jsWeatherIcon');
+const weatherIConURL = "http://openweathermap.org/img/wn/"
 
 function getGeo(){
     navigator.geolocation.getCurrentPosition(getGeoSuccess, getGeoFail);
@@ -24,13 +27,16 @@ function getWeather(_lat, _lng){
     }).then(function(json){
         const temp = Math.ceil(json.main.temp - 273.15);
         const pos = json.name;
-
-        displayWeatherData(temp, pos);
+        const weather = json.weather[0];
+        
+        displayWeatherData(temp, pos, weather);
     });
 }
-function displayWeatherData(_temp, _pos){
+function displayWeatherData(_temp, _pos, _weather){
     temperature.innerText = `${_temp}˚`;
     position.innerText = _pos;
+    weather.innerText = _weather.description;
+    weatherIcon.src = `${weatherIConURL}${_weather.icon}.png`;
 }
 function getGeoFail(){}
 function loadCoords(){
