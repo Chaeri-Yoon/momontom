@@ -7,7 +7,11 @@ const imageURLS = ["https://images.pexels.com/photos/1103970/pexels-photo-110397
         "https://images.pexels.com/photos/4100130/pexels-photo-4100130.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"];
 
 function setBackground(){
-    body.style.backgroundImage = `url(${imageURLS[getRandomNumber()]}`;
+    const image = new Image();
+    //image.src = `/background_images/${getRandomNumber()}.jpg`;    
+    image.src= imageURLS[getRandomNumber()];
+    image.classList.add('background__image');
+    body.appendChild(image);
 }
 function getRandomNumber(){
     return Math.floor(numOfBackground * Math.random());
