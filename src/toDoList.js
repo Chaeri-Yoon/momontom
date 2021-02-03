@@ -54,25 +54,45 @@ function onTaskEntered(event){
 function addTask(_task, _isUnDone){
     const li = document.createElement('li');
     const checkButton = document.createElement('button');
+    const modifyButton = document.createElement('button');
     const deleteButton = document.createElement('button');
-    const i = document.createElement('i');
+    const checkButtonIcon = document.createElement('i');
+    const modifyButtonIcon = document.createElement('i');
     const span = document.createElement('span');
 
     span.innerText = _task;
-    i.classList.add('far');
-    i.classList.add(_isUnDone ? UNDONEBUTTON : DONEBUTTON);
-    i.classList.add('fa-lg');
-    i.addEventListener('click', checkIfDone);
+    checkButtonIcon.classList.add('far');
+    checkButtonIcon.classList.add(_isUnDone ? UNDONEBUTTON : DONEBUTTON);
+    checkButtonIcon.classList.add('fa-lg');
+    checkButtonIcon.addEventListener('click', checkIfDone);
+
+    modifyButtonIcon.classList.add('fas');
+    modifyButtonIcon.classList.add('fa-pencil-alt');
+    modifyButtonIcon.classList.add('fa-lg');
+    //modifyButtonIcon.addEventListener('click', );
+    modifyButton.style.display = "none";
+    modifyButton.classList.add('btn__modify');
 
     deleteButton.innerText = "❌"
     deleteButton.classList.add('btn__delete');
     deleteButton.addEventListener('click', deleteTask);
+    deleteButton.style.display = "none";
 
-    checkButton.appendChild(i);
+    checkButton.appendChild(checkButtonIcon);
+    modifyButton.appendChild(modifyButtonIcon);
     li.id = _isUnDone ? (lastToDoNum)++ + 1 : (lastDoneNum)++ + 1;
     li.classList.add(_isUnDone ? UNDONE : DONE);
+    li.addEventListener('mouseover', ()=>{
+                                            modifyButton.style.display = "inline";
+                                            deleteButton.style.display = "inline";
+                                        });
+    li.addEventListener('mouseleave', ()=>{
+                                            modifyButton.style.display = "none";
+                                            deleteButton.style.display = "none";
+                                        });
     li.appendChild(checkButton);
     li.appendChild(span);
+    li.appendChild(modifyButton);
     li.appendChild(deleteButton);
 
     if(_isUnDone)   toDo.appendChild(li);
