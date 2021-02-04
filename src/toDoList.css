@@ -17,7 +17,8 @@
   color: #1abc9c;
 }
 .addArea input,
-.addArea input:focus {
+.addArea input:focus,
+.taskName:focus {
   border: none;
   border-bottom: 1px solid #666;
   outline: none;

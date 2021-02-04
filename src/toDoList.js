@@ -61,6 +61,9 @@ function addTask(_task, _isUnDone){
     const span = document.createElement('span');
 
     span.innerText = _task;
+    span.classList.add('taskName');
+    span.addEventListener('keypress', function(e){if(e.code == "Enter") updateTask(e);});
+
     checkButtonIcon.classList.add('far');
     checkButtonIcon.classList.add(_isUnDone ? UNDONEBUTTON : DONEBUTTON);
     checkButtonIcon.classList.add('fa-lg');
@@ -69,7 +72,7 @@ function addTask(_task, _isUnDone){
     modifyButtonIcon.classList.add('fas');
     modifyButtonIcon.classList.add('fa-pencil-alt');
     modifyButtonIcon.classList.add('fa-lg');
-    //modifyButtonIcon.addEventListener('click', );
+    modifyButtonIcon.addEventListener('click', modifyTaskText);
     modifyButton.style.display = "none";
     modifyButton.classList.add('btn__modify');
 
@@ -138,16 +141,16 @@ function moveToToDoTasks(event){
     toDo.appendChild(event.target.parentNode.parentNode);
     addData(text, true);
 }
-function addData(task, isUnDone){
-    let array = isUnDone ? toDoTasks : doneTasks;
-    const num = isUnDone ? lastToDoNum: lastDoneNum;
+function addData(task, _isUnDone){
+    let array = _isUnDone ? toDoTasks : doneTasks;
+    const num = _isUnDone ? lastToDoNum: lastDoneNum;
     const taskObj = {
         id : num,
         task: task
     }
     array.push(taskObj);
 
-    if(isUnDone) toDoTasks = array;
+    if(_isUnDone) toDoTasks = array;
     else doneTasks = array;
 
     if(toDoTasks.length != 0){
@@ -169,14 +172,35 @@ function removeData(_item, _isUnDone){
     if(_isUnDone) toDoTasks = array;
     else doneTasks = array;
     
-    //if(toDoTasks.length != 0){
-        const toDoData = JSON.stringify(toDoTasks);
-        localStorage.setItem([displayDate] + "__" + [UNDONE], toDoData);
-    //}
-    //if(doneTasks.length != 0){
-        const doneData = JSON.stringify(doneTasks);
-        localStorage.setItem([displayDate] + "__" + [DONE], doneData);
-    //}
+    const toDoData = JSON.stringify(toDoTasks);
+    localStorage.setItem([displayDate] + "__" + [UNDONE], toDoData);
+    const doneData = JSON.stringify(doneTasks);
+    localStorage.setItem([displayDate] + "__" + [DONE], doneData);
+}
+function modifyTaskText(event){
+    const modifyItem = event.target.parentNode.parentNode.querySelector('.taskName');
+    modifyItem.contentEditable = true;
+    modifyItem.focus();
+}
+function updateTask(event){
+    event.target.contentEditable = false;
+    event.target = null;
+
+    const isUnDone = event.target.parentNode.classList.contains(UNDONE);
+    const array =  isUnDone ? toDoTasks : doneTasks;
+    const id = event.target.parentNode.id;
+    const text = event.target.innerText;
+
+    array.forEach((task)=> {if(task.id == id) task.task = text;});
+
+    if(isUnDone) toDoTasks = array;
+    else doneTasks = array;
+
+    const toDoData = JSON.stringify(toDoTasks);
+    localStorage.setItem([displayDate] + "__" + [UNDONE], toDoData);
+
+    const doneData = JSON.stringify(doneTasks);
+    localStorage.setItem([displayDate] + "__" + [DONE], doneData);
 }
 function deleteTask(event){
     const selectedTask = event.target.parentNode;
